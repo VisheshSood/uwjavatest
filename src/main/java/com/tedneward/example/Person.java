@@ -3,7 +3,7 @@ package com.tedneward.example;
 import java.beans.*;
 import java.util.*;
 
-public class Person {
+public class Person implements Comparable<Person> {
   private int age;
   private String name;
   private double salary;
@@ -47,6 +47,54 @@ public class Person {
     return "{{FIXME}}";
   }
 
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    if (age < 0) {
+      throw new IllegalArgumentException("The age you set is invalid. 
+                                        The age cannot be below 0");
+    }
+    this.age = age;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    if (name == null){
+      throw new IllegalArgumentException("The name entered is not valid.");
+    }
+    this.name = name;
+  }
+
+  public boolean equals(Object otherObject) {
+    if (otherObject instanceof Person) {
+      Person person = (Person) otherObject;
+      return person.name == this.name && person.age == this.age;
+    }
+    return false;
+  }
+
+  public int compareTo(Person otherPerson){
+    double difference = this.salary - otherPerson.salary;
+    if (difference > 0) {
+      return -1;
+    } else if (difference < 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+
+  public static class AgeComparator implements Comparator<Person> {
+    public int compare(Person one, Person two) {
+      return one.age - two.age;
+    }
+  }
   // PropertyChangeListener support; you shouldn't need to change any of
   // these two methods or the field
   //
