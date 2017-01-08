@@ -90,22 +90,15 @@ public class Person implements Comparable<Person> {
   }
 
   public int compareTo(Person otherPerson){
-    double difference = this.salary - otherPerson.salary;
-    if (difference > 0) {
-      return -1;
-    } else if (difference < 0) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return (int) (otherPerson.getSalary() - this.getSalary());
   }
 
   public int count(){
     return count;
   }
   public static class AgeComparator implements Comparator<Person> {
-    public int compare(Person one, Person two) {
-      return one.age - two.age;
+    public int compare(Person first, Person second) {
+      return first.age - second.age;
     }
   }
 
@@ -117,6 +110,7 @@ public class Person implements Comparable<Person> {
     ans.add(new Person("Matthew", 15, 0));
     return ans;
   }
+
   // PropertyChangeListener support; you shouldn't need to change any of
   // these two methods or the field
   //
